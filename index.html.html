@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Girlfriend Day ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #ff9a9e, #ff3c5c);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* ================= ENVELOPE STYLES ================= */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      background: #ec648b; /* soft pink background for intro */
+      color: #fff;
+    }
+
+    .envelope-container {
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .envelope {
+      width: 200px;
+      height: 120px;
+      background: #ff2759;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      transform-style: preserve-3d;
+      transition: transform 1s;
+      font-size: 50px;
+    }
+
+    .envelope.open {
+      transform: rotateY(180deg);
+    }
+
+    /* ================= EXISTING STYLES ================= */
+    .container {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    button {
+      background: #ff4b5c;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 10px 5px; /* add some spacing */
+    }
+
+    button:hover {
+      background: #ff1e38;
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: #db0016;
+      font-size: 24px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= ENVELOPE INTRO ================= -->
+  <div id="intro">
+    <h1>Click the Envelope 🎁</h1>
+    <div class="envelope-container" onclick="openGift()">
+      <div class="envelope" id="envelope">💌</div>
+    </div>
+  </div>
+
+  <!-- ================= EXISTING VALENTINE CONTENT ================= -->
+  <div class="container hidden" id="valentine">
+    <h1>Happy Girlfriend Day 💖</h1>
+    <h2>To my cutie moma</h2>
+
+    <div class="card">
+      <p>
+       idk how many days has it been since we are together.
+       we don't know about eachother yet but im hoping that we will as we grow up together, i love you sooo much moma thankyou for loving me and coming into my life.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Why I Love You?</h3>
+      <p>• you accept me as i am</p>
+      <p>• you always make efforts for me</p>
+      <p>• you stay with even though i don't look good</p>
+      <p>• you are very cute and adorable why i wont love you?</p>
+      <p>you are loyal and only mine</p>
+      <p>you can cook, you can do chores aswell</p>
+      <p>and i dont know why i love you but i just love you moma</p>
+    </div>
+
+    <button onclick="showSurprise()">press this 💌</button>
+    <button onclick="openInstagram()">Message Me 💌</button>
+
+    <div class="card hidden" id="surprise">
+      <h3>i will never leave you </h3>
+      <p>
+        i promise i will never leave you i may fight sometimes and im sorry in advance but fights are temporary and my love is permanent, remember that okay?.  
+        no matter how much i hurt you, get mad at you but my love will always stay same, ❤️
+      </p>
+    </div>
+
+    <audio id="bg-music" preload="auto" loop>
+    <source src="lovegirl.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+  </div>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    const music = document.getElementById("bg-music");
+    const valentine = document.getElementById("valentine");
+    const intro = document.getElementById("intro");
+    const envelope = document.getElementById("envelope");
+
+    function playMusic() {
+      music.volume = 0.7;
+      const playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => console.log("Music is playing 🎵"))
+          .catch(error => {
+            console.error("Music failed to play:", error);
+            alert("Tap again to play music ❤️");
+          });
+      }
+    }
+
+    function showSurprise() {
+      document.getElementById("surprise").classList.remove("hidden");
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+
+    // ================= ENVELOPE CLICK FUNCTION =================
+    function openGift() {
+      envelope.classList.add("open"); // flip the envelope
+      setTimeout(() => {
+        intro.style.display = "none";       // hide intro
+        valentine.classList.remove("hidden"); // show Valentine content
+        playMusic(); // start music automatically
+      }, 1000); // match CSS transition
+    }
+
+    // ================= OPEN INSTAGRAM FUNCTION =================
+    function openInstagram() {
+      window.open("https://www.instagram.com/virelo60?igsh=eWxrNmMzdmtiaDJl", "_blank");
+    }
+  </script>
+
+</body>
+</html>
